@@ -17,6 +17,7 @@ import { Button } from "../ui/button";
 import { Menu } from "lucide-react";
 import LogoMark from "../common/logo-mark";
 import { Link } from "@tanstack/react-router";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface HamburgerMenuProps {
   categories: Category[];
@@ -32,7 +33,7 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({ categories }) => {
           </Button>
         </SheetTrigger>
 
-        <SheetContent side="left" className="space-y-4">
+        <SheetContent side="left" className="flex flex-col gap-4">
           <SheetHeader>
             <SheetTitle className="inline-flex items-center gap-x-2">
               <LogoMark className="w-8 h-8 text-foreground" />
@@ -45,25 +46,29 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({ categories }) => {
             </SheetDescription>
           </SheetHeader>
 
-          <Accordion type="multiple">
-            {categories.map(({ name, components }) => (
-              <AccordionItem key={name} value={name}>
-                <AccordionTrigger className="text-sm">{name}</AccordionTrigger>
-                <AccordionContent className="flex flex-col">
-                  {components.map(({ title, href }) => (
-                    <SheetTrigger key={title} asChild>
-                      <Link
-                        to={href}
-                        className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground font-medium transition-colors"
-                      >
-                        {title}
-                      </Link>
-                    </SheetTrigger>
-                  ))}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <ScrollArea className="flex-1">
+            <Accordion type="multiple">
+              {categories.map(({ name, components }) => (
+                <AccordionItem key={name} value={name}>
+                  <AccordionTrigger className="text-sm">
+                    {name}
+                  </AccordionTrigger>
+                  <AccordionContent className="flex flex-col">
+                    {components.map(({ title, href }) => (
+                      <SheetTrigger key={title} asChild>
+                        <Link
+                          to={href}
+                          className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground font-medium transition-colors"
+                        >
+                          {title}
+                        </Link>
+                      </SheetTrigger>
+                    ))}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </ScrollArea>
         </SheetContent>
       </Sheet>
     </div>
