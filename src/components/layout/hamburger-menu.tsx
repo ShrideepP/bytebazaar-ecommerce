@@ -45,7 +45,7 @@ const HamburgerMenu: FC<HamburgerMenuProps> = ({ categories }) => {
             </SheetDescription>
           </SheetHeader>
 
-          <Accordion type="single" collapsible>
+          <Accordion type="multiple">
             {categories.map(({ name, components }) => (
               <AccordionItem key={name} value={name}>
                 <AccordionTrigger className="text-sm">{name}</AccordionTrigger>
